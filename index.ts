@@ -3,22 +3,20 @@ import * as mongoose from 'mongoose';
 import * as bodyParser from 'body-parser';
 import routes from './src/routes/crmRoutes';
 import messanger from './src/controllers/createMessage';
+import { Settings } from './settings';
 
 const app = express();
 // number type
-const PORT: number = 3000;
-const mlabUser: string = "Malkhasyan";
-const mlabPass: string = "x43norte";
 
 //instance of our class
-let messages = new messanger(PORT);
+let messages = new messanger(Settings.PORT);
 
 const dataConnection = (user: string, pass: string): string => {
     return `mongodb://${user}:${pass}@cluster0-shard-00-00.4vjqo.mongodb.net:27017,cluster0-shard-00-01.4vjqo.mongodb.net:27017,cluster0-shard-00-02.4vjqo.mongodb.net:27017/test_database?ssl=true&replicaSet=atlas-6r2gny-shard-0&authSource=admin&retryWrites=true&w=majority`;
 }
 
 // string
-const database = dataConnection(mlabUser, mlabPass);
+const database = dataConnection(Settings.mlabUser, Settings.mlabPass);
 
 // mongoose connection
 mongoose.connect(database, {
@@ -38,6 +36,6 @@ app.get('/', (req, res) =>
     res.send(messages.messagePrint())
 );
 
-app.listen(PORT, () =>
+app.listen(Settings.PORT, () =>
     console.log(messages.messagePrint())
 );
