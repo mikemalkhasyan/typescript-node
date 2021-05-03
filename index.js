@@ -8,8 +8,8 @@ const PORT = 3000;
 
 // mongoose connection
 mongoose.Promise = global.Promise;
-mongoose.connect('<insert your own credentials>', {
-    useMongoClient: true
+mongoose.connect('mongodb://Malkhasyan:x43norte@cluster0-shard-00-00.4vjqo.mongodb.net:27017,cluster0-shard-00-01.4vjqo.mongodb.net:27017,cluster0-shard-00-02.4vjqo.mongodb.net:27017/test_database?ssl=true&replicaSet=atlas-6r2gny-shard-0&authSource=admin&retryWrites=true&w=majority', {
+    useMongoClient: true,
 });
 
 // bodyparser setup
