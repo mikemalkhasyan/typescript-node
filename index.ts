@@ -33,12 +33,17 @@ interface Name {
     firstName: string;
 }
 
-// function with interface
-const nameCreator = (name: Name): string => {
-    return `Hello, ${name.firstName},`
+// generics
+function nameCreator<T>(name: T): T {
+    return name;
 }
 
-let myName = {firstName: "Manny"};
+// function with interface
+// const nameCreator = (name: Name): string => {
+//     return `Hello, ${name.firstName},`
+// }
+
+let myName = nameCreator<string>('Manny, ');
 
 // serving static files
 app.use(express.static('public'));
@@ -48,5 +53,5 @@ app.get('/', (req, res) =>
 );
 
 app.listen(Settings.PORT, () =>
-    console.log(nameCreator(myName), messages.messagePrint())
+    console.log(myName, messages.messagePrint())
 );
